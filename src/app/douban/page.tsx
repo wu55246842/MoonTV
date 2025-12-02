@@ -698,7 +698,7 @@ function DoubanPageClient() {
     if (type === 'anime' && primarySelection === '每日放送') {
       return '来自 Bangumi 番组计划的精选内容';
     }
-    return '来自豆瓣的精选内容';
+    return '来自互联网的精选内容';
   };
 
   const getActivePath = () => {
