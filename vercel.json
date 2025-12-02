@@ -17,6 +17,7 @@
     }
   ],
   "env": {
-    "PASSWORD": "Password123"
+    "PASSWORD": "Password123",
+    "NEXT_PUBLIC_NO_AUTH": "true"
   }
 }

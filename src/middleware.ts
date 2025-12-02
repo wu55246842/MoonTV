@@ -13,6 +13,12 @@ export async function middleware(request: NextRequest) {
   }
 
   const storageType = process.env.NEXT_PUBLIC_STORAGE_TYPE || 'localstorage';
+  const noAuth = process.env.NEXT_PUBLIC_NO_AUTH === 'true';
+
+  // 如果开启了免登录且不是管理路径，直接放行
+  if (noAuth && !pathname.startsWith('/admin') && !pathname.startsWith('/api/admin')) {
+    return NextResponse.next();
+  }
 
   if (!process.env.PASSWORD) {
     // 如果没有设置密码，重定向到警告页面
@@ -133,6 +139,6 @@ function shouldSkipAuth(pathname: string): boolean {
 // 配置middleware匹配规则
 export const config = {
   matcher: [
-    '/((?!_next/static|_next/image|favicon.ico|login|warning|api/login|api/register|api/logout|api/cron|api/server-config|api/tvbox/config|api/tvbox/categories|api/douban/recommends|api/admin/tvbox).*)',
+    '/((?!_next/static|_next/image|favicon.ico|login|warning|api/login|api/register|api/logout|api/cron|api/server-config|api/tvbox/config|api/tvbox/categories|api/douban/recommends).*)',
   ],
 };
